@@ -21,7 +21,7 @@ public class UserServices {
 
     private void ensureEmailIsAvailable(String email , Long currentUserId){
         userRepository.findByEmail(email){
-
+//wead
         }
     }
 
