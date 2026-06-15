@@ -1,9 +1,13 @@
 package Real_Time_Code_Editor.example.Services;
 
-import Real_Time_Code_Editor.example.DTOs.RegisterDTOs;
+import Real_Time_Code_Editor.example.DTOs.CreateUserDTOs;
+import Real_Time_Code_Editor.example.DTOs.UserDTOs;
+import Real_Time_Code_Editor.example.Entity.User;
 import Real_Time_Code_Editor.example.Repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
+
+import javax.swing.*;
 
 @Service
 public class UserServices {
@@ -15,17 +19,24 @@ public class UserServices {
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserDTO saveUser(RegisterDTOs registerDTOs){
+    public UserDTOs saveUser(CreateUserDTOs dto){
+        if()
+    }
+
+    private void ensureEmailIsAvailable(String email , String currentUserId){
+        userRepository.findByEmail(email)
+                .filter(existingUser -> !existingUser.getGmail().equals(currentUserId))
+                .ifPresent(existingUser -> {
+                    throw new IllegalStateException("Email is already in use");
+                });
 
     }
 
-    private void ensureEmailIsAvailable(String email , Long currentUserId){
-        userRepository.findByEmail(email){
-//weaddasfas
-        }
+    public UserDTOs toDto(User user){
+        UserDTOs userDTOs = new UserDTOs();
+        userDTOs.setName(user.getName());
+        userDTOs.setGmail(user.getGmail());
+        return userDTOs;
     }
-
-
-
 
 }
