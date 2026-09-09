@@ -15,30 +15,33 @@ public class UserServices {
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServices(UserRepository userRepository,
-                        PasswordEncoder passwordEncoder) {
+    public UserServices(
+            UserRepository userRepository,
+            PasswordEncoder passwordEncoder) {
+
         this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    // CREATE USER
     public UserDTOs saveUser(CreateUserDTOs dto) {
 
-        // Check if email already exists
-        ensureEmailIsAvailable(dto.getGmail(), 0L);
+        ensureEmailIsAvailable(dto.getGmail());
 
         User user = new User();
 
         user.setName(dto.getName());
         user.setGmail(dto.getGmail());
-        user.setPassword(passwordEncoder.encode(dto.getPassword()));
+
+        // Never store the plain password
+        user.setPassword(
+                passwordEncoder.encode(dto.getPassword())
+        );
 
         userRepository.save(user);
 
         return toDto(user);
     }
 
-    // GET ALL USERS
     public List<UserDTOs> getUser() {
 
         return userRepository.findAll()
@@ -47,53 +50,42 @@ public class UserServices {
                 .toList();
     }
 
-    // CHECK EMAIL AVAILABILITY
-    private void ensureEmailIsAvailable(String email, long currentUserId) {
+    public UserDTOs getUserByMail(String gmail) {
 
-        userRepository.findByGmail(email)
-                .filter(existingUser ->
-                        existingUser.getId() != currentUserId
-                )
-                .ifPresent(existingUser -> {
-                    throw new IllegalStateException(
-                            "Email is already in use"
-                    );
-                });
-    }
-
-    // GET USER BY ID
-    public UserDTOs getUser(String id) throws Exception {
-
-        return toDto(getExistingUser(id));
-    }
-
-    // GET EXISTING USER
-    public User getExistingUser(String id) throws Exception {
-
-        long userId;
-
-        try {
-            userId = Long.parseLong(id);
-        } catch (NumberFormatException e) {
-            throw new Exception("Invalid user id: " + id);
-        }
-
-        return userRepository.findById(userId)
+        return userRepository.findByGmail(gmail)
+                .map(this::toDto)
                 .orElseThrow(() ->
-                        new Exception(
+                        new RuntimeException("User not found")
+                );
+    }
+
+    public User getExistingUser(Long id) {
+
+        return userRepository.findById(id)
+                .orElseThrow(() ->
+                        new RuntimeException(
                                 "User not found with id " + id
                         )
                 );
     }
 
-    // CONVERT ENTITY TO DTO
+    private void ensureEmailIsAvailable(String gmail) {
+
+        if (userRepository.findByGmail(gmail).isPresent()) {
+
+            throw new IllegalStateException(
+                    "Email is already in use"
+            );
+        }
+    }
+
     public UserDTOs toDto(User user) {
 
-        UserDTOs userDTOs = new UserDTOs();
+        UserDTOs dto = new UserDTOs();
 
-        userDTOs.setName(user.getName());
-        userDTOs.setGmail(user.getGmail());
+        dto.setName(user.getName());
+        dto.setGmail(user.getGmail());
 
-        return userDTOs;
+        return dto;
     }
 }
