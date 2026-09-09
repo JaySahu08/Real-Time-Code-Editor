@@ -24,5 +24,4 @@ public class CreateUserDTOs {
     @NotBlank(message = "Password cannot be empty")
     @Size(min = 6, message = "Password must be at least 6 characters long")
     private String password;
-
 }

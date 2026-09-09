@@ -7,57 +7,93 @@ import Real_Time_Code_Editor.example.Repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
-import javax.swing.*;
 import java.util.List;
 
 @Service
 public class UserServices {
+
     private final UserRepository userRepository;
     private final PasswordEncoder passwordEncoder;
 
-    public UserServices(UserRepository user , PasswordEncoder passwordEncoder){
-        this.userRepository = user;
+    public UserServices(UserRepository userRepository,
+                        PasswordEncoder passwordEncoder) {
+        this.userRepository = userRepository;
         this.passwordEncoder = passwordEncoder;
     }
 
-    public UserDTOs saveUser(CreateUserDTOs dto){
-        ensureEmailIsAvailable(dto.getGmail() , null);
+    // CREATE USER
+    public UserDTOs saveUser(CreateUserDTOs dto) {
+
+        // Check if email already exists
+        ensureEmailIsAvailable(dto.getGmail(), 0L);
 
         User user = new User();
+
         user.setName(dto.getName());
         user.setGmail(dto.getGmail());
         user.setPassword(passwordEncoder.encode(dto.getPassword()));
+
         userRepository.save(user);
+
         return toDto(user);
     }
 
-    public List<UserDTOs>  getUser(){
-        return userRepository.findAll().stream().map(this::toDto).toList();
+    // GET ALL USERS
+    public List<UserDTOs> getUser() {
+
+        return userRepository.findAll()
+                .stream()
+                .map(this::toDto)
+                .toList();
     }
 
-    private void ensureEmailIsAvailable(String email , String currentUserId){
-        userRepository.findByEmail(email)
-                .filter(existingUser -> !existingUser.getGmail().equals(currentUserId))
+    // CHECK EMAIL AVAILABILITY
+    private void ensureEmailIsAvailable(String email, long currentUserId) {
+
+        userRepository.findByGmail(email)
+                .filter(existingUser ->
+                        existingUser.getId() != currentUserId
+                )
                 .ifPresent(existingUser -> {
-                    throw new IllegalStateException("Email is already in use");
+                    throw new IllegalStateException(
+                            "Email is already in use"
+                    );
                 });
-
     }
 
+    // GET USER BY ID
     public UserDTOs getUser(String id) throws Exception {
+
         return toDto(getExistingUser(id));
     }
 
+    // GET EXISTING USER
     public User getExistingUser(String id) throws Exception {
-        return userRepository.findById(id)
-                .orElseThrow(() -> new Exception("User not found with id " + id));
+
+        long userId;
+
+        try {
+            userId = Long.parseLong(id);
+        } catch (NumberFormatException e) {
+            throw new Exception("Invalid user id: " + id);
+        }
+
+        return userRepository.findById(userId)
+                .orElseThrow(() ->
+                        new Exception(
+                                "User not found with id " + id
+                        )
+                );
     }
 
-    public UserDTOs toDto(User user){
+    // CONVERT ENTITY TO DTO
+    public UserDTOs toDto(User user) {
+
         UserDTOs userDTOs = new UserDTOs();
+
         userDTOs.setName(user.getName());
         userDTOs.setGmail(user.getGmail());
+
         return userDTOs;
     }
-
 }
