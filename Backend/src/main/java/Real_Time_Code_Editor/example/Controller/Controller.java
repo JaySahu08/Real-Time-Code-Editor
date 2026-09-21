@@ -3,6 +3,7 @@ package Real_Time_Code_Editor.example.Controller;
 import Real_Time_Code_Editor.example.DTOs.CreateUserDTOs;
 import Real_Time_Code_Editor.example.DTOs.UserDTOs;
 import Real_Time_Code_Editor.example.Services.UserServices;
+import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;
@@ -31,6 +32,15 @@ public class Controller {
     @GetMapping("/user/{id}")
     public UserDTOs getById(@PathVariable String mail){
         return userServices.getUserByMail(mail);
+    }
+
+    @GetMapping("/me")
+    public UserDTOs getCurrentUser(
+            Authentication authentication) {
+
+        String gmail = authentication.getName();
+
+        return userServices.getUserByMail(gmail);
     }
 
 }
