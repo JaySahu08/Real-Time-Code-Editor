@@ -1,4 +1,4 @@
-package Real_Time_Code_Editor.example.Security;
+package Real_Time_Code_Editor.Security;
 
 import io.jsonwebtoken.Claims;
 import io.jsonwebtoken.Jwts;

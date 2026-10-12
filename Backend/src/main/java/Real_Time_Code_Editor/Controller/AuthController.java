@@ -1,7 +1,7 @@
-package Real_Time_Code_Editor.example.Controller;
+package Real_Time_Code_Editor.Controller;
 
-import Real_Time_Code_Editor.example.DTOs.LoginRequest;
-import Real_Time_Code_Editor.example.Services.AuthService;
+import Real_Time_Code_Editor.DTOs.LoginRequest;
+import Real_Time_Code_Editor.Services.AuthService;
 import jakarta.validation.Valid;
 import org.springframework.web.bind.annotation.*;
 

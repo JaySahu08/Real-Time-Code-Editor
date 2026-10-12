@@ -1,4 +1,4 @@
-package Real_Time_Code_Editor.example;
+package Real_Time_Code_Editor;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;

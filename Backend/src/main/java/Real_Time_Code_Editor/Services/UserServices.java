@@ -1,9 +1,9 @@
-package Real_Time_Code_Editor.example.Services;
+package Real_Time_Code_Editor.Services;
 
-import Real_Time_Code_Editor.example.DTOs.CreateUserDTOs;
-import Real_Time_Code_Editor.example.DTOs.UserDTOs;
-import Real_Time_Code_Editor.example.Entity.User;
-import Real_Time_Code_Editor.example.Repository.UserRepository;
+import Real_Time_Code_Editor.DTOs.CreateUserDTOs;
+import Real_Time_Code_Editor.DTOs.UserDTOs;
+import Real_Time_Code_Editor.Entity.User;
+import Real_Time_Code_Editor.Repository.UserRepository;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 

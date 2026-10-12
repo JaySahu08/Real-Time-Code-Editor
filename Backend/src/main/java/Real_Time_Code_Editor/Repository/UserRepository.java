@@ -1,6 +1,6 @@
-package Real_Time_Code_Editor.example.Repository;
+package Real_Time_Code_Editor.Repository;
 
-import Real_Time_Code_Editor.example.Entity.User;
+import Real_Time_Code_Editor.Entity.User;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 import java.util.Optional;

@@ -1,4 +1,4 @@
-package Real_Time_Code_Editor.example.Entity;
+package Real_Time_Code_Editor.Entity;
 
 import jakarta.persistence.*;
 import lombok.*;

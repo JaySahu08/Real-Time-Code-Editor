@@ -1,7 +1,7 @@
-package Real_Time_Code_Editor.example.Security;
+package Real_Time_Code_Editor.Security;
 
-import Real_Time_Code_Editor.example.Entity.User;
-import Real_Time_Code_Editor.example.Repository.UserRepository;
+import Real_Time_Code_Editor.Entity.User;
+import Real_Time_Code_Editor.Repository.UserRepository;
 import jakarta.servlet.FilterChain;
 import jakarta.servlet.ServletException;
 import jakarta.servlet.http.HttpServletRequest;

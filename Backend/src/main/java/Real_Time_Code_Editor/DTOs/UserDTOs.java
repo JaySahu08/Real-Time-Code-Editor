@@ -1,4 +1,4 @@
-package Real_Time_Code_Editor.example.DTOs;
+package Real_Time_Code_Editor.DTOs;
 
 import jakarta.validation.constraints.Email;
 import jakarta.validation.constraints.NotBlank;

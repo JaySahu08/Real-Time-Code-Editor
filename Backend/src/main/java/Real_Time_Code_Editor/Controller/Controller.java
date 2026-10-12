@@ -1,8 +1,8 @@
-package Real_Time_Code_Editor.example.Controller;
+package Real_Time_Code_Editor.Controller;
 
-import Real_Time_Code_Editor.example.DTOs.CreateUserDTOs;
-import Real_Time_Code_Editor.example.DTOs.UserDTOs;
-import Real_Time_Code_Editor.example.Services.UserServices;
+import Real_Time_Code_Editor.DTOs.CreateUserDTOs;
+import Real_Time_Code_Editor.DTOs.UserDTOs;
+import Real_Time_Code_Editor.Services.UserServices;
 import org.springframework.security.core.Authentication;
 import org.springframework.web.bind.annotation.*;
 
