@@ -1,0 +1,65 @@
+.dashboard { padding-top: var(--space-8); padding-bottom: var(--space-12); }
+
+.dashboard-header {
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    margin-bottom: var(--space-6);
+    gap: var(--space-4);
+    flex-wrap: wrap;
+}
+
+.dashboard-title { margin: 0; font-size: 22px; font-weight: 600; }
+
+.dashboard-actions { display: flex; gap: var(--space-3); }
+
+.dashboard-empty { text-align: center; padding: var(--space-12); color: var(--color-text-secondary); }
+.dashboard-empty h3 { margin: 0 0 var(--space-2); color: var(--color-text); }
+.dashboard-empty p { margin: 0; }
+
+.dashboard-grid {
+    display: grid;
+    grid-template-columns: repeat(auto-fill, minmax(260px, 1fr));
+    gap: var(--space-4);
+}
+
+.room-card {
+    display: block;
+    text-decoration: none;
+    color: inherit;
+    transition: transform 0.12s, box-shadow 0.12s;
+}
+
+.room-card:hover { text-decoration: none; transform: translateY(-1px); box-shadow: var(--shadow-md); }
+
+.room-card-header { display: flex; justify-content: space-between; align-items: center; gap: var(--space-2); }
+.room-card-name { margin: 0; font-size: 15px; font-weight: 600; }
+.room-card-desc { margin: var(--space-2) 0; color: var(--color-text-secondary); font-size: 13px; }
+.room-card-meta { margin-top: var(--space-3); color: var(--color-text-muted); font-size: 12px; font-family: var(--font-mono); }
+
+.room-role {
+    font-size: 11px;
+    font-weight: 600;
+    padding: 2px 8px;
+    border-radius: 999px;
+    letter-spacing: 0.03em;
+}
+.room-role-owner { background: var(--color-primary-soft); color: var(--color-primary); }
+.room-role-editor { background: var(--color-success-soft); color: var(--color-success); }
+.room-role-viewer { background: var(--color-surface-subtle); color: var(--color-text-secondary); }
+
+.modal-backdrop {
+    position: fixed;
+    inset: 0;
+    background: rgba(17, 24, 39, 0.4);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    padding: var(--space-4);
+    z-index: 100;
+}
+
+.modal { width: 100%; max-width: 440px; padding: var(--space-6); background: var(--color-surface); }
+.modal-title { margin: 0 0 var(--space-4); font-size: 18px; }
+.modal-form { display: flex; flex-direction: column; gap: var(--space-4); margin-top: var(--space-3); }
+.modal-actions { display: flex; justify-content: flex-end; gap: var(--space-2); margin-top: var(--space-2); }

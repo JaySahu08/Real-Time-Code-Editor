@@ -1,0 +1,22 @@
+.room-page { padding-top: var(--space-8); padding-bottom: var(--space-12); }
+
+.room-header { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); margin-bottom: var(--space-6); }
+.room-name { margin: 0; font-size: 22px; font-weight: 600; }
+.room-desc { margin: var(--space-1) 0 0; color: var(--color-text-secondary); font-size: 13px; }
+
+.room-info { margin-bottom: var(--space-6); padding: var(--space-4); }
+.room-info-row { display: flex; align-items: center; justify-content: space-between; gap: var(--space-4); }
+.room-info-label { color: var(--color-text-secondary); font-size: 13px; }
+.room-info-value { font-family: var(--font-mono); font-size: 14px; letter-spacing: 0.05em; background: var(--color-surface-subtle); padding: 4px 10px; border-radius: var(--radius-sm); }
+
+.room-section-title { font-size: 15px; font-weight: 600; margin: 0 0 var(--space-3); }
+
+.project-list { list-style: none; padding: 0; margin: 0; display: flex; flex-direction: column; gap: var(--space-2); }
+.project-item { padding: var(--space-4); display: flex; align-items: center; gap: var(--space-3); }
+.project-name { font-weight: 500; }
+.project-desc { color: var(--color-text-secondary); font-size: 13px; }
+
+.room-role { font-size: 11px; font-weight: 600; padding: 3px 10px; border-radius: 999px; letter-spacing: 0.03em; }
+.room-role-owner { background: var(--color-primary-soft); color: var(--color-primary); }
+.room-role-editor { background: var(--color-success-soft); color: var(--color-success); }
+.room-role-viewer { background: var(--color-surface-subtle); color: var(--color-text-secondary); }
